@@ -1,1 +1,1 @@
-# 3dfindit-freecad-integration
+The 3DfindIT.com integration for FreeCAD >v0.19.
