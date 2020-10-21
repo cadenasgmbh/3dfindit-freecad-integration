@@ -52,6 +52,6 @@ class Browser:
     return self.threeDAPI
 
 def getInstance():
-    if Browser._instance == None:
+    if Browser._instance is None:
       Browser._instance = Browser()
     return Browser._instance

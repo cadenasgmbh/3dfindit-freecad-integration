@@ -19,7 +19,6 @@
 
 from concurrent.futures import ThreadPoolExecutor
 import threading
-import time
 import queue
 
 
@@ -33,6 +32,15 @@ class JsTaskExecutor:
 
     def __lt__(self, other):
       return self.order < other.order
+
+    def __le__(self, other):
+      return self.order <= other.order
+
+    def __gt__(self, other):
+      return self.order > other.order
+
+    def __ge__(self, other):
+      return self.order >= other.order
 
     def run(self):
       self.fn(*self.args, **self.kwargs)
@@ -86,11 +94,6 @@ class ThreeDfinditAPI:
     self.executor.submit(self._runJs, script=script, priority=priority)
 
   def _runJs(self, script):
-    # Debug.
-    import FreeCAD  
-    FreeCAD.Console.PrintMessage(script + "\n")
-   
-    # Run the JS code
     self.webView.page().runJavaScript("(function(){ return " + script + ";})();")
 
   def loadByMident(self, mident):

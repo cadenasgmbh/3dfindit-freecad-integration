@@ -21,8 +21,8 @@ import tempfile
 import threading
 import webbrowser
 
-from enum import Enum
 from PySide2 import QtCore
+from PySide2 import QtWidgets
 from urllib.request import urlretrieve
 from zipfile import ZipFile
 
@@ -53,8 +53,16 @@ class ThreeDfinditNativeAPI(QtCore.QObject):
   @QtCore.Slot("QJsonObject")
   def downloadReadyObject(self, downloadReadyObj):
     if downloadReadyObj["isExternal"]:
-      # Open in system browser.
-      webbrowser.open(downloadReadyObj["url"], new=2)
+      # Alert user that this is a crawled document.
+      msgBox = QtWidgets.QMessageBox()
+      msgBox.setIcon(QtWidgets.QMessageBox.Question)
+      msgBox.setWindowTitle("3DfindIT.com")
+      msgBox.setText("Should 3DfindIT redirect you to the website of the supplier?")
+      msgBox.setStandardButtons(QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+      msgBox.setWindowModality(QtCore.Qt.ApplicationModal)
+      if (msgBox.exec_() == QtWidgets.QMessageBox.Yes):
+        # Open in system browser.
+        webbrowser.open(downloadReadyObj["url"], new=2)        
     else:
       # Download file.
       tmpDownloadPath = tempfile.mkstemp(prefix="3df", suffix=".zip")[1]

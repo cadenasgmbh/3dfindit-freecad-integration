@@ -18,7 +18,6 @@
 #***************************************************************************
 
 from PySide2 import QtCore
-from PySide2 import QtGui
 from PySide2 import QtWidgets
 from PySide2 import QtWebChannel
 from PySide2 import QtWebEngineWidgets
@@ -35,8 +34,8 @@ class MyWebEnginePage(QtWebEngineWidgets.QWebEnginePage):
     # Ask the user if we should proceed with an invalid certifacate.
     msgBox = QtWidgets.QMessageBox()
     msgBox.setIcon(QtWidgets.QMessageBox.Warning)
-    msgBox.setWindowTitle("Ceriticate error")
-    msgBox.setText("An invalid certificate was encountered while loading 3DFindIT. Procced anyway?")
+    msgBox.setWindowTitle("3DfindIT.com")
+    msgBox.setText("An invalid certificate was encountered while loading 3DFindIT. Proceed anyway?")
     msgBox.setStandardButtons(QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
     msgBox.setWindowModality(QtCore.Qt.ApplicationModal)
     if (msgBox.exec_() == QtWidgets.QMessageBox.Yes):
