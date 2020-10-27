@@ -26,7 +26,7 @@ import FreeCAD
 import FreeCADGui
 
 
-class ThreeDFinditShowCommand:
+class CADENAS3DFinditShowCommand:
     def GetResources(self):
         return { 
           'Pixmap': os.path.join(os.path.join(FreeCAD.getUserAppDataDir(), "Mod", "3Dfindit"), "Resources", "icons", "3dfindit.svg"),
@@ -37,11 +37,11 @@ class ThreeDFinditShowCommand:
         return True
 
     def Activated(self):
-        import ThreeDfinditDialog
-        ThreeDfinditDialog.toggle()
+        import CADENAS3DfinditDialog
+        CADENAS3DfinditDialog.toggle()
 
 
-class ThreeDFinditGeoSearchCommand:
+class CADENAS3DFinditGeoSearchCommand:
     def GetResources(self):
         return { 
           'Pixmap': os.path.join(os.path.join(FreeCAD.getUserAppDataDir(), "Mod", "3Dfindit"), "Resources", "icons", "geomsearch.svg"),
@@ -53,8 +53,8 @@ class ThreeDFinditGeoSearchCommand:
 
     def Activated(self):
         # Make sure our dialog is visible.
-        import ThreeDfinditDialog
-        ThreeDfinditDialog.show()
+        import CADENAS3DfinditDialog
+        CADENAS3DfinditDialog.show()
 
         # Export currently active document to STP.
         import tempfile
@@ -96,7 +96,7 @@ class ThreeDFinditGeoSearchCommand:
         return True
 
 
-class ThreeDFinditSketchSearchCommand:
+class CADENAS3DFinditSketchSearchCommand:
     def GetResources(self):
         return {
           'Pixmap': os.path.join(os.path.join(FreeCAD.getUserAppDataDir(), "Mod", "3Dfindit"), "Resources", "icons", "sketchsearch.svg"),
@@ -110,14 +110,14 @@ class ThreeDFinditSketchSearchCommand:
         return True
 
 
-class ThreeDfinditWorkbench(Workbench):
+class CADENAS3DfinditWorkbench(Workbench):
     def __init__(self):
         self.__class__.Icon = os.path.join(os.path.join(FreeCAD.getUserAppDataDir(), "Mod", "3Dfindit"), "Resources", "icons", "3dfindit.svg")
         self.__class__.MenuText = "3DfindIT.com"
         self.__class__.ToolTip = "3DfindIT.com by CADENAS"
 
     def Initialize(self):
-        self.commandList = ["ThreeD_Show", "ThreeD_GeoSearch"]
+        self.commandList = ["CADENAS3Df_Show", "CADENAS3Df_GeoSearch"]
         self.appendToolbar("&3DfindIT.com", self.commandList)
         self.appendMenu("&3DfindIT.com", self.commandList)
 
@@ -133,20 +133,12 @@ class ThreeDfinditWorkbench(Workbench):
     def GetClassName(self): 
         return "Gui::PythonWorkbench"
 
-def MsgBox(icon, msg, title):
-    mb = QtGui.QMessageBox()
-    mb.setIcon(icon)
-    mb.setText(msg)
-    mb.setWindowTitle(title)
-    mb.exec_() 
-
 freeCadVersion = int(App.Version()[1])
 pythonVersion = int(sys.version[0:1])
 if freeCadVersion >= 19 and pythonVersion >= 3:
-    FreeCADGui.addWorkbench(ThreeDfinditWorkbench())
-    FreeCADGui.addCommand("ThreeD_Show", ThreeDFinditShowCommand())
-    FreeCADGui.addCommand("ThreeD_GeoSearch", ThreeDFinditGeoSearchCommand())
-    FreeCADGui.addCommand("ThreeD_SketchSearch", ThreeDFinditSketchSearchCommand())
+    FreeCADGui.addWorkbench(CADENAS3DfinditWorkbench())
+    FreeCADGui.addCommand("CADENAS3Df_Show", CADENAS3DFinditShowCommand())
+    FreeCADGui.addCommand("CADENAS3Df_GeoSearch", CADENAS3DFinditGeoSearchCommand())
 else:
     if freeCadVersion < 19:
         FreeCAD.Console.PrintError("3DfindIT.com: FreeCAD below version 0.19 is not supported. Please update to a recent version.\n")

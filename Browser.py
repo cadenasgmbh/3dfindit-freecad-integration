@@ -20,8 +20,8 @@
 from PySide2 import QtWidgets
 from PySide2 import QtWebEngineWidgets
 
-import ThreeDfinditNativeAPI
-import ThreeDfinditAPI
+import CADENAS3DfinditNativeAPI
+import CADENAS3DfinditAPI
 
 
 class Browser:
@@ -35,10 +35,10 @@ class Browser:
       self.webView.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
 
       # Init native API.
-      self.threeDNativeAPI = ThreeDfinditNativeAPI.ThreeDfinditNativeAPI(self.webView)
+      self.threeDNativeAPI = CADENAS3DfinditNativeAPI.CADENAS3DfinditNativeAPI(self.webView)
 
       # Init API.
-      self.threeDAPI = ThreeDfinditAPI.ThreeDfinditAPI(self.webView, self.threeDNativeAPI)
+      self.threeDAPI = CADENAS3DfinditAPI.CADENAS3DfinditAPI(self.webView, self.threeDNativeAPI)
     else:
       raise Exception("Invalid state.")
 
