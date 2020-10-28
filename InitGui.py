@@ -20,8 +20,6 @@
 import os
 import sys
 
-from PySide2 import QtGui
-
 import FreeCAD
 import FreeCADGui
 
