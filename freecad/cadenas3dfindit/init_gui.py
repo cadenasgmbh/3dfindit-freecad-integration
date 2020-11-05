@@ -27,8 +27,7 @@ import FreeCADGui
 
 class CADENAS3DFinditShowCommand:
     def GetResources(self):
-        from freecad.cadenas3dfindit import CADENAS3DfinditDummy
-        module_path = os.path.split(CADENAS3DfinditDummy.__file__)[0]
+        from freecad.cadenas3dfindit import module_path
         return { 
           'Pixmap': os.path.join(module_path, "resources", "icons", "3dfindit.svg"),
           'MenuText': "3DfindIT.com",
@@ -44,8 +43,7 @@ class CADENAS3DFinditShowCommand:
 
 class CADENAS3DFinditGeoSearchCommand:
     def GetResources(self):
-        from freecad.cadenas3dfindit import CADENAS3DfinditDummy
-        module_path = os.path.split(CADENAS3DfinditDummy.__file__)[0]
+        from freecad.cadenas3dfindit import module_path
         return { 
           'Pixmap': os.path.join(module_path, "resources", "icons", "geomsearch.svg"),
           'MenuText': "Geometrical search",
@@ -101,8 +99,7 @@ class CADENAS3DFinditGeoSearchCommand:
 
 class CADENAS3DFinditSketchSearchCommand:
     def GetResources(self):
-        from freecad.cadenas3dfindit import CADENAS3DfinditDummy
-        module_path = os.path.split(CADENAS3DfinditDummy.__file__)[0]
+        from freecad.cadenas3dfindit import module_path
         return {
           'Pixmap': os.path.join(module_path, "resources", "icons", "sketchsearch.svg"),
           'MenuText': "Sketch search",
@@ -117,8 +114,7 @@ class CADENAS3DFinditSketchSearchCommand:
 
 class CADENAS3DfinditWorkbench(FreeCADGui.Workbench):
     def __init__(self):
-        from freecad.cadenas3dfindit import CADENAS3DfinditDummy
-        module_path = os.path.split(CADENAS3DfinditDummy.__file__)[0]
+        from freecad.cadenas3dfindit import module_path
         self.__class__.Icon = os.path.join(module_path, "resources", "icons", "3dfindit.svg")
         self.__class__.MenuText = "3DfindIT.com"
         self.__class__.ToolTip = "3DfindIT.com by CADENAS"
