@@ -30,7 +30,7 @@ class CADENAS3DFinditShowCommand:
         from freecad.cadenas3dfindit import CADENAS3DfinditDummy
         module_path = os.path.split(CADENAS3DfinditDummy.__file__)[0]
         return { 
-          'Pixmap': os.path.join(module_path, "Resources", "icons", "3dfindit.svg"),
+          'Pixmap': os.path.join(module_path, "resources", "icons", "3dfindit.svg"),
           'MenuText': "3DfindIT.com",
           'ToolTip': "Show/Hide 3DfindIT.com"}
 
@@ -47,7 +47,7 @@ class CADENAS3DFinditGeoSearchCommand:
         from freecad.cadenas3dfindit import CADENAS3DfinditDummy
         module_path = os.path.split(CADENAS3DfinditDummy.__file__)[0]
         return { 
-          'Pixmap': os.path.join(module_path, "Resources", "icons", "geomsearch.svg"),
+          'Pixmap': os.path.join(module_path, "resources", "icons", "geomsearch.svg"),
           'MenuText': "Geometrical search",
           'ToolTip': "Start a geometrical search on 3DfindIT.com"}
 
@@ -103,8 +103,8 @@ class CADENAS3DFinditSketchSearchCommand:
     def GetResources(self):
         from freecad.cadenas3dfindit import CADENAS3DfinditDummy
         module_path = os.path.split(CADENAS3DfinditDummy.__file__)[0]
-       return {
-          'Pixmap': os.path.join(module_path, "Resources", "icons", "sketchsearch.svg"),
+        return {
+          'Pixmap': os.path.join(module_path, "resources", "icons", "sketchsearch.svg"),
           'MenuText': "Sketch search",
           'ToolTip': "Start a sketch search on 3DfindIT.com"}
 
@@ -119,8 +119,8 @@ class CADENAS3DfinditWorkbench(FreeCADGui.Workbench):
     def __init__(self):
         from freecad.cadenas3dfindit import CADENAS3DfinditDummy
         module_path = os.path.split(CADENAS3DfinditDummy.__file__)[0]
-        self.__class__.Icon = os.path.join(module_path, "Resources", "icons", "3dfindit.svg")
-       self.__class__.MenuText = "3DfindIT.com"
+        self.__class__.Icon = os.path.join(module_path, "resources", "icons", "3dfindit.svg")
+        self.__class__.MenuText = "3DfindIT.com"
         self.__class__.ToolTip = "3DfindIT.com by CADENAS"
 
     def Initialize(self):
