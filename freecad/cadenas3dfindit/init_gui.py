@@ -37,8 +37,8 @@ class CADENAS3DFinditShowCommand:
         return True
 
     def Activated(self):
-        from freecad.cadenas3dfindit import CADENAS3DfinditDialog
-        CADENAS3DfinditDialog.toggle()
+        from freecad.cadenas3dfindit import dialog
+        dialog.toggle()
 
 
 class CADENAS3DFinditGeoSearchCommand:
@@ -54,8 +54,8 @@ class CADENAS3DFinditGeoSearchCommand:
 
     def Activated(self):
         # Make sure our dialog is visible.
-        from freecad.cadenas3dfindit import CADENAS3DfinditDialog
-        CADENAS3DfinditDialog.show()
+        from freecad.cadenas3dfindit import dialog
+        dialog.show()
 
         # Export currently active document to STP.
         import tempfile
@@ -79,8 +79,8 @@ class CADENAS3DFinditGeoSearchCommand:
           return False
 
         # Init geometrical search.
-        from freecad.cadenas3dfindit import Browser
-        api = Browser.getInstance().getThreeDAPI()
+        from freecad.cadenas3dfindit import browser
+        api = browser.getInstance().getThreeDAPI()
         api.startGeoSearch(os.path.basename(tmpSTPPath))
 
         # Split content into chunks and pass it to our API. Make sure to encode the

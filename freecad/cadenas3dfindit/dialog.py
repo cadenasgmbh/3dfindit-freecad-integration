@@ -24,8 +24,6 @@ from PySide2 import QtWebEngineWidgets
 
 import FreeCADGui
 
-from freecad.cadenas3dfindit import Browser
-
 # We only have one widget, ever.
 browserWidget = None
 
@@ -43,17 +41,18 @@ class MyWebEnginePage(QtWebEngineWidgets.QWebEnginePage):
       return True
     return False
 
-class CADENAS3DfinditDialog(QtWidgets.QDialog):
+class Dialog(QtWidgets.QDialog):
   def __init__(self):
-    super(CADENAS3DfinditDialog, self).__init__()
+    super(Dialog, self).__init__()
 
     # Setup the widget.
     self.setObjectName("3Dfindit_Dialog")
     self.setWindowTitle("3DfindIT.com")
     
     # Grab the browser.
-    self.webView = Browser.getInstance().getBrowser()
-    self.threeDNativeAPI = Browser.getInstance().getThreeDNativeAPI()
+    from freecad.cadenas3dfindit import browser
+    self.webView = browser.getInstance().getBrowser()
+    self.threeDNativeAPI = browser.getInstance().getThreeDNativeAPI()
 
     # Prepare a simple layout.
     self.layout = QtWidgets.QVBoxLayout(self)
@@ -76,22 +75,22 @@ class CADENAS3DfinditDialog(QtWidgets.QDialog):
     self.webView.setUrl("https://freecad-embedded.3dfindit.com/?webview=QTWEBCHANNEL")
 
   def showEvent(self, event):
-    super(CADENAS3DfinditDialog, self).showEvent(event)
+    super(Dialog, self).showEvent(event)
 
   def hideEvent(self, event):
-    super(CADENAS3DfinditDialog, self).hideEvent(event)
+    super(Dialog, self).hideEvent(event)
 
   def event(self, event):
     if event.type() == QtCore.QEvent.ShortcutOverride:
         event.accept()
-    return super(CADENAS3DfinditDialog, self).event(event)
+    return super(Dialog, self).event(event)
 
 
 def createWidget():
   # Create a new dock widget containing our dialog.
   browserWidget = QtWidgets.QDockWidget()
   browserWidget.setObjectName("3Dfindit_Widget")
-  browserWidget.setWidget(CADENAS3DfinditDialog())
+  browserWidget.setWidget(Dialog())
 
   # Add dock widget to main window.
   FreeCADGui.getMainWindow().addDockWidget(QtCore.Qt.RightDockWidgetArea, browserWidget)
