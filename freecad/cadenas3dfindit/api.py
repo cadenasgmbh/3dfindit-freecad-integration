@@ -85,7 +85,7 @@ class JsTaskExecutor:
       self.order += 1
 
 
-class CADENAS3DfinditAPI:
+class API:
   def __init__(self, webView, three3DNativeAPI):
     self.webView = webView
     self.executor = JsTaskExecutor(three3DNativeAPI)

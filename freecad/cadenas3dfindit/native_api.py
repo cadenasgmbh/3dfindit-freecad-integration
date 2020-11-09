@@ -30,9 +30,9 @@ import FreeCADGui
 import Part
 
 
-class CADENAS3DfinditNativeAPI(QtCore.QObject):
+class NativeAPI(QtCore.QObject):
   def __init__(self, webView):
-    super(CADENAS3DfinditNativeAPI, self).__init__(webView)
+    super(NativeAPI, self).__init__(webView)
 
     # Add an event that is fired when the API becomes ready to use.
     self.isReady = threading.Event()
@@ -40,8 +40,8 @@ class CADENAS3DfinditNativeAPI(QtCore.QObject):
   @QtCore.Slot()
   def ready(self):
     # Use API to set a few properties.
-    from freecad.cadenas3dfindit import Browser
-    api = Browser.getInstance().getThreeDAPI()
+    from freecad.cadenas3dfindit import browser
+    api = browser.getInstance().getThreeDAPI()
     api.setProperty("cadsystem", "freecad")
     api.setProperty("cadversion", "0.19")
     api.setProperty("productname", "FreeCAD")
