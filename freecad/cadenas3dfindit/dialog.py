@@ -105,11 +105,16 @@ def getWidget():
     browserWidget = createWidget()
   return browserWidget
 
+def isVisible():
+  return getWidget().toggleViewAction().isChecked()
+
 def show():
-  getWidget().toggleViewAction().setChecked(True)
+  if not isVisible():
+    toggle()
 
 def hide():
-  getWidget().toggleViewAction().setChecked(False)
+  if isVisible():
+    toggle()
 
 def toggle():
   getWidget().toggleViewAction().trigger()
