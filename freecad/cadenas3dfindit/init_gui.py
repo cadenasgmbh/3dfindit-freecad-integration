@@ -30,8 +30,8 @@ class CADENAS3DFinditShowCommand:
         from freecad.cadenas3dfindit import module_path
         return { 
           'Pixmap': os.path.join(module_path, "resources", "icons", "3dfindit.svg"),
-          'MenuText': "3DfindIT.com",
-          'ToolTip': "Show/Hide 3DfindIT.com"}
+          'MenuText': "3DfindIT",
+          'ToolTip': "Show/Hide 3DfindIT"}
 
     def IsActive(self):
         return True
@@ -47,7 +47,7 @@ class CADENAS3DFinditGeoSearchCommand:
         return { 
           'Pixmap': os.path.join(module_path, "resources", "icons", "geomsearch.svg"),
           'MenuText': "Geometrical search",
-          'ToolTip': "Start a geometrical search on 3DfindIT.com"}
+          'ToolTip': "Start a geometrical search on 3DfindIT"}
 
     def IsActive(self):
         return not FreeCAD.ActiveDocument is None
@@ -103,7 +103,7 @@ class CADENAS3DFinditSketchSearchCommand:
         return {
           'Pixmap': os.path.join(module_path, "resources", "icons", "sketchsearch.svg"),
           'MenuText': "Sketch search",
-          'ToolTip': "Start a sketch search on 3DfindIT.com"}
+          'ToolTip': "Start a sketch search on 3DfindIT"}
 
     def IsActive(self):
         return not FreeCAD.ActiveDocument is None
@@ -116,13 +116,13 @@ class CADENAS3DfinditWorkbench(FreeCADGui.Workbench):
     def __init__(self):
         from freecad.cadenas3dfindit import module_path
         self.__class__.Icon = os.path.join(module_path, "resources", "icons", "3dfindit.svg")
-        self.__class__.MenuText = "3DfindIT.com"
-        self.__class__.ToolTip = "3DfindIT.com by CADENAS"
+        self.__class__.MenuText = "3DfindIT"
+        self.__class__.ToolTip = "3DfindIT by CADENAS"
 
     def Initialize(self):
         self.commandList = ["CADENAS3Df_Show", "CADENAS3Df_GeoSearch"]
-        self.appendToolbar("&3DfindIT.com", self.commandList)
-        self.appendMenu("&3DfindIT.com", self.commandList)
+        self.appendToolbar("&3DfindIT", self.commandList)
+        self.appendMenu("&3DfindIT", self.commandList)
 
     def Activated(self):
         return
@@ -144,7 +144,7 @@ if freeCadVersion >= 19 and pythonVersion >= 3:
     FreeCADGui.addCommand("CADENAS3Df_GeoSearch", CADENAS3DFinditGeoSearchCommand())
 else:
     if freeCadVersion < 19:
-        FreeCAD.Console.PrintError("3DfindIT.com: FreeCAD below version 0.19 is not supported. Please update to a recent version.\n")
+        FreeCAD.Console.PrintError("3DfindIT: FreeCAD below version 0.19 is not supported. Please update to a recent version.\n")
 
     if pythonVersion < 3:
-        FreeCAD.Console.PrintError("3DfindIT.com: Python below version 3 is not supported. Please update to a recent version.\n")
+        FreeCAD.Console.PrintError("3DfindIT: Python below version 3 is not supported. Please update to a recent version.\n")

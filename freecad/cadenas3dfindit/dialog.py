@@ -33,7 +33,7 @@ class MyWebEnginePage(QtWebEngineWidgets.QWebEnginePage):
     # Ask the user if we should proceed with an invalid certifacate.
     msgBox = QtWidgets.QMessageBox()
     msgBox.setIcon(QtWidgets.QMessageBox.Warning)
-    msgBox.setWindowTitle("3DfindIT.com")
+    msgBox.setWindowTitle("3DfindIT")
     msgBox.setText("An invalid certificate was encountered while loading 3DFindIT. Proceed anyway?")
     msgBox.setStandardButtons(QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
     msgBox.setWindowModality(QtCore.Qt.ApplicationModal)
@@ -47,7 +47,7 @@ class Dialog(QtWidgets.QDialog):
 
     # Setup the widget.
     self.setObjectName("3Dfindit_Dialog")
-    self.setWindowTitle("3DfindIT.com")
+    self.setWindowTitle("3DfindIT")
     
     # Grab the browser.
     from freecad.cadenas3dfindit import browser

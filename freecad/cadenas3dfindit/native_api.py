@@ -56,7 +56,7 @@ class NativeAPI(QtCore.QObject):
       # Alert user that this is a crawled document.
       msgBox = QtWidgets.QMessageBox()
       msgBox.setIcon(QtWidgets.QMessageBox.Question)
-      msgBox.setWindowTitle("3DfindIT.com")
+      msgBox.setWindowTitle("3DfindIT")
       msgBox.setText("Should 3DfindIT redirect you to the website of the supplier?")
       msgBox.setStandardButtons(QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
       msgBox.setWindowModality(QtCore.Qt.ApplicationModal)
