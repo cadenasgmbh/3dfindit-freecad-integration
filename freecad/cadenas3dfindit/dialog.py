@@ -19,8 +19,11 @@
 
 from PySide2 import QtCore
 from PySide2 import QtWidgets
-from PySide2 import QtWebChannel
-from PySide2 import QtWebEngineWidgets
+from PySide2 import QtWebEngineWidgets    
+try:
+  from PySide2 import QtWebChannel
+except ImportError:
+  raise Exception("Missing package. Please install: python3-pyqt5.qtwebchannel.")
 
 import FreeCADGui
 

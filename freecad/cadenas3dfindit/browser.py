@@ -18,7 +18,10 @@
 #***************************************************************************
 
 from PySide2 import QtWidgets
-from PySide2 import QtWebEngineWidgets
+try:
+  from PySide2 import QtWebEngineWidgets
+except ImportError:
+  raise Exception("Missing package. Please install: python3-pyside2.qtwebenginewidgets.")
 
 
 class Browser:
