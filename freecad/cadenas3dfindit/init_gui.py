@@ -37,8 +37,11 @@ class CADENAS3DFinditShowCommand:
         return True
 
     def Activated(self):
-        from freecad.cadenas3dfindit import dialog
-        dialog.toggle()
+        try:
+          from freecad.cadenas3dfindit import dialog
+          dialog.toggle()
+        except Exception as e:
+          FreeCAD.Console.PrintError(str(e) + "\n")
 
 
 class CADENAS3DFinditGeoSearchCommand:
@@ -54,8 +57,11 @@ class CADENAS3DFinditGeoSearchCommand:
 
     def Activated(self):
         # Make sure our dialog is visible.
-        from freecad.cadenas3dfindit import dialog
-        dialog.show()
+        try:
+          from freecad.cadenas3dfindit import dialog
+          dialog.show()
+        except Exception as e:
+          FreeCAD.Console.PrintError(str(e) + "\n")
 
         # Export currently active document to STP.
         import tempfile
