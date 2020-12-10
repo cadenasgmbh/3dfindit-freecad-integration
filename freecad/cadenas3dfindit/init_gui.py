@@ -62,6 +62,7 @@ class CADENAS3DFinditGeoSearchCommand:
           dialog.show()
         except Exception as e:
           FreeCAD.Console.PrintError(str(e) + "\n")
+          return False
 
         # Export currently active document to STP.
         import tempfile
