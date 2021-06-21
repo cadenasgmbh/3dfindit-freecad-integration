@@ -17,18 +17,21 @@
 #*    USA
 #***************************************************************************
 
-from concurrent.futures import ThreadPoolExecutor
+from PySide2 import QtCore
 import threading
 import queue
 
 
-class JsTaskExecutor:
+class JsTaskWatcher(QtCore.QObject):
+  # Prepare a simple signal that we emit once the
+  # blocking queue has some work for us.
+  hasWork = QtCore.Signal(str)
+
   class JsTask:
-    def __init__(self, fn, order, args, kwargs):
-      self.fn = fn
+    def __init__(self, order, script):
+      # Save parameters for later.
       self.order = order
-      self.args = args
-      self.kwargs = kwargs
+      self.script = script
 
     def __lt__(self, other):
       return self.order < other.order
@@ -42,14 +45,14 @@ class JsTaskExecutor:
     def __ge__(self, other):
       return self.order >= other.order
 
-    def run(self):
-      self.fn(*self.args, **self.kwargs)
-
   def __init__(self, threeDNativeAPI):
+    # Init our base class.
+    QtCore.QObject.__init__(self)
+    
     # Save the native API object for later.
     self.threeDNativeAPI = threeDNativeAPI
 
-    # We'll use a priority-based queue instead of the  normal queue.
+    # We'll use a priority-based queue instead of the normal queue.
     self.queue = queue.PriorityQueue()
 
     # Just an incrementing number to ensure all calls with the same
@@ -73,28 +76,24 @@ class JsTaskExecutor:
       # Run the task. There is still a slim chance that we run into
       # a reload very, very shortly before this task is run. Nothing
       # I can do...
-      task.run()
+      self.hasWork.emit(task.script)
 
-  def submit(self, fn, *args, **kwargs):
-      priority = kwargs.get('priority')
-      if 'priority' in kwargs:
-        del kwargs['priority']
-
+  def submit(self, script, priority):
       # Queue up the task and increment the order.
-      self.queue.put((priority, JsTaskExecutor.JsTask(fn, self.order, args, kwargs)))
+      self.queue.put((priority, JsTaskWatcher.JsTask(self.order, script)))
       self.order += 1
-
 
 class API:
   def __init__(self, webView, three3DNativeAPI):
     self.webView = webView
-    self.executor = JsTaskExecutor(three3DNativeAPI)
+    self.watcher = JsTaskWatcher(three3DNativeAPI)
+    self.watcher.hasWork.connect(self._hasWork)
+
+  def _hasWork(self, script):
+    self.webView.page().runJavaScript("(function(){ return " + script + ";})();")
 
   def runJs(self, script, priority=50):
-    self.executor.submit(self._runJs, script=script, priority=priority)
-
-  def _runJs(self, script):
-    self.webView.page().runJavaScript("(function(){ return " + script + ";})();")
+    self.watcher.submit(script, priority)
 
   def loadByMident(self, mident):
     self.runJs("window.ThreeDfinditAPI.loadByMident('" + mident + "')")
