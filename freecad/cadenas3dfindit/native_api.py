@@ -20,14 +20,17 @@
 import tempfile
 import threading
 import webbrowser
+import os
 
 from PySide2 import QtCore
 from PySide2 import QtWidgets
 from urllib.request import urlretrieve
 from zipfile import ZipFile
 
+import FreeCAD
 import FreeCADGui
 import Part
+import ImportGui
 
 
 class NativeAPI(QtCore.QObject):
@@ -74,8 +77,9 @@ class NativeAPI(QtCore.QObject):
           zip.extractall(tmpExtractPath)
 
       # Open the STEP file.
-      stepFile = tmpExtractPath + "\\" + downloadReadyObj["startFile"]
-      Part.show(Part.read(stepFile), downloadReadyObj["NB"])
+      stepFile = os.path.join(tmpExtractPath, downloadReadyObj["startFile"])
+      # Import the file into the active FreeCAD document
+      ImportGui.insert(stepFile, FreeCAD.ActiveDocument.Name)
 
       # Fit to view.
       FreeCADGui.SendMsgToActiveView("ViewFit")
