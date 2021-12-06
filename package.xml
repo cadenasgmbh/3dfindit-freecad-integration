@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<package format="1">
+  <name>3DfindIT for FreeCAD</name>
+  <description>3DfindIT.com, the engineering search engine for 3D components from CADENAS, provides users with easy access to millions of CAD models from thousands of international manufacturers and a range of intuitive search methods.</description>
+  <version>1.0</version>
+  <maintainer email="tsielaff@">tsielaff</maintainer>
+  <license file="LICENSE">LGPL-3.0</license>
+  <url type="repository" branch="master">https://github.com/cadenasgmbh/3dfindit-freecad-integration</url>
+  <url type="readme">https://github.com/cadenasgmbh/3dfindit-freecad-integration/blob/master/README.md</url>
+
+  <content>
+    <workbench>
+      <classname>CADENAS3DfinditWorkbench</classname>
+      <subdirectory>./</subdirectory>
+      <icon>freecad/cadenas3dfindit/resources/icons/3dfindit.svg</icon>
+      <freecadmin>0.19.0</freecadmin>
+    </workbench>
+  </content>
+
+</package>
