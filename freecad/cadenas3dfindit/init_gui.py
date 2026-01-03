@@ -143,15 +143,17 @@ class CADENAS3DfinditWorkbench(FreeCADGui.Workbench):
     def GetClassName(self): 
         return "Gui::PythonWorkbench"
 
-freeCadVersion = int(FreeCAD.Version()[1])
+freeCadVersion = FreeCAD.Version()
+ifreeCadVersion = int(freeCadVersion[0]) + int(freeCadVersion[1])/10
 pythonVersion = int(sys.version[0:1])
-if freeCadVersion >= 19 and pythonVersion >= 3:
+
+if freeCadVersion >= 0.19 and pythonVersion >= 3:
     FreeCADGui.addWorkbench(CADENAS3DfinditWorkbench())
     FreeCADGui.addCommand("CADENAS3Df_Show", CADENAS3DFinditShowCommand())
     FreeCADGui.addCommand("CADENAS3Df_GeoSearch", CADENAS3DFinditGeoSearchCommand())
+    FreeCAD.Console.PrintMessage("Start 3SFindIt Workbench v.1.2.\r")
 else:
-    if freeCadVersion < 19:
-        FreeCAD.Console.PrintError("3DfindIT: FreeCAD below version 0.19 is not supported. Please update to a recent version.\n")
-
+    if freeCadVersion < 0.19:
+        FreeCAD.Console.PrintError("3DfindIT: FreeCAD " + str(ifreeCadVersion) + " below version 0.19 and not supported. Please update FreeCAD to a recent version.\r")
     if pythonVersion < 3:
-        FreeCAD.Console.PrintError("3DfindIT: Python below version 3 is not supported. Please update to a recent version.\n")
+        FreeCAD.Console.PrintError("3DfindIT: Python "+ str(pythonVersion) + " below version 3 and not supported. Please update Python to a recent version.\r")
