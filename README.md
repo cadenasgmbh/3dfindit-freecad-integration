@@ -1,3 +1,5 @@
+<h1>⚠️ This addon is no longer maintained.<h1>
+
 <h1>3Dfindit for FreeCAD</h1>
 
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cadenasgmbh/3dfindit-freecad-integration.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cadenasgmbh/3dfindit-freecad-integration/context:python)
